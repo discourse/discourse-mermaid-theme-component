@@ -19,7 +19,7 @@ export default apiInitializer("0.11.1", (api) => {
       mermaid.append(spinner);
     });
 
-    await loadScript(settings.theme_uploads.mermaidLib);
+    await loadScript("https://unpkg.com/mermaid@8.13.10/dist/mermaid.min.js");
 
     mermaids.forEach((mermaid) => {
       window.mermaid.mermaidAPI.render(
