@@ -1,3 +1,6 @@
 en:
   theme_metadata:
     description: ""
+
+  rendering_error: "<b>Error</b><p>Please ensure your mermaid code is running on <a href='https://mermaid.live/'>mermaid.live</a> and indented with 4 spaces, eg: <pre><code>    flowchart TB\n    A --> B</code></pre></p>"
+  insert_mermaid_sample: "Mermaid chart"
