@@ -1,13 +1,11 @@
-.cooked [data-wrap="mermaid"] {
+.cooked pre[data-code-wrap="mermaid"] {
   overflow-y: auto;
-  border: 5px solid var(--primary-low);
   margin: 1em 0;
-  padding: 1em;
   font-size: var(--font-0);
-  background: var(--secondary);
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 400px;
 
   &:not([data-processed="true"]) {
     // prevents text flashing while loading
