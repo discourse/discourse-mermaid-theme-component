@@ -59,16 +59,18 @@ export default apiInitializer("0.11.1", (api) => {
       });
 
       mermaids.forEach((mermaid, index) => {
+        const code = mermaid.querySelector("code");
+
+        if (!code) {
+          return;
+        }
+
         try {
-          if (
-            window.mermaid.parse(
-              mermaid.querySelector("code").textContent || ""
-            )
-          ) {
+          if (window.mermaid.parse(code.textContent || "")) {
             let key = helper ? `post_${helper.getModel().id}` : "composer";
             window.mermaid.mermaidAPI.render(
               `mermaid_${index}_${key}`,
-              mermaid.textContent || "",
+              code.textContent || "",
               (svg) => {
                 mermaid.innerHTML = svg;
               }
