@@ -45,8 +45,9 @@ export default apiInitializer("0.11.1", (api) => {
       window.mermaid.initialize({
         startOnLoad: false,
         theme:
-          Session.current().darkModeAvailable &&
-          Session.current().defaultColorSchemeIsDark
+          getComputedStyle(document.body)
+            .getPropertyValue("--scheme-type")
+            .trim() === "dark"
             ? "dark"
             : "default",
       });
