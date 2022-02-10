@@ -44,7 +44,11 @@ export default apiInitializer("0.11.1", (api) => {
 
       window.mermaid.initialize({
         startOnLoad: false,
-        theme: Session.current().userDarkSchemeId > 0 ? "dark" : "default",
+        theme:
+          Session.current().userDarkSchemeId ===
+          Session.current().userColorSchemeId
+            ? "dark"
+            : "default",
       });
 
       mermaids.forEach((mermaid) => {
