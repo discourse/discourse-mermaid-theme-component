@@ -1,7 +1,7 @@
 import loadScript from "discourse/lib/load-script";
 import { apiInitializer } from "discourse/lib/api";
 
-async function applyMermaid(element, id) {
+async function applyMermaid(element, key) {
   const mermaids = element.querySelectorAll("pre[data-code-wrap=mermaid]");
 
   if (!mermaids.length) {
@@ -40,7 +40,7 @@ async function applyMermaid(element, id) {
 
     try {
       if (window.mermaid.parse(code.textContent || "")) {
-        let key = id ? id : "composer";
+        key = key || "composer";
         window.mermaid.mermaidAPI.render(
           `mermaid_${index}_${key}`,
           code.textContent || "",
