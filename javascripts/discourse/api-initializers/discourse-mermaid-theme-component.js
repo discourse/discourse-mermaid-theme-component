@@ -40,7 +40,6 @@ async function applyMermaid(element, key = "composer") {
 
     try {
       if (window.mermaid.parse(code.textContent || "")) {
-        key = key || "composer";
         window.mermaid.mermaidAPI.render(
           `mermaid_${index}_${key}`,
           code.textContent || "",
