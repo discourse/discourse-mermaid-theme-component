@@ -89,7 +89,7 @@ export default apiInitializer("0.11.1", (api) => {
 
   if (api.decorateChatMessage) {
     api.decorateChatMessage((element) => {
-      applyMermaid(message, `chat_message_${element.id}`);
+      applyMermaid(element, `chat_message_${element.id}`);
     });
   }
 
