@@ -21,6 +21,10 @@ async function applyMermaid(element, key = "composer") {
   });
 
   mermaids.forEach((mermaid) => {
+    if (mermaid.dataset.processed) {
+      return;
+    }
+
     const spinner = document.createElement("div");
     spinner.classList.add("spinner");
 
