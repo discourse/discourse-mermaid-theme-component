@@ -88,8 +88,8 @@ export default apiInitializer("0.11.1", (api) => {
   });
 
   if (api.decorateChatMessage) {
-    api.decorateChatMessage((message) => {
-      applyMermaid(message, `chat_message_${message.id}`);
+    api.decorateChatMessage((element) => {
+      applyMermaid(message, `chat_message_${element.id}`);
     });
   }
 
