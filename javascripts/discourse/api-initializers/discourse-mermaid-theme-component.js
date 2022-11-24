@@ -76,17 +76,17 @@ function updateMarkdownHeight(mermaid, index) {
 
   if (height !== calculatedHeight) {
     mermaid.dataset.calculatedHeight = height;
-    // TODO: need to use API here
+    // TODO: an API to grab the composer vs leaning on hunting through HTML
+    // would be better
     let composer = document.getElementsByClassName("d-editor-input")[0];
-    let old = composer.value;
 
-    let split = old.split("\n");
+    let split = composer.value.split("\n");
 
     let n = 0;
     for (let i = 0; i < split.length; i++) {
-      if (split[i].match(/```mermaid/)) {
+      if (split[i].match(/```mermaid((\s*)|.*auto)$/)) {
         if (n === index) {
-          split[i] = "```mermaid height=" + height;
+          split[i] = "```mermaid height=" + height + ",auto";
         }
         n += 1;
       }
