@@ -1,7 +1,4 @@
 # settings.yml
-extend_content_security_policy:
-  type: list
-  default: "script_src: https://unpkg.com/mermaid@8.13.10/dist/mermaid.min.js"
 svg_icons:
   default: "project-diagram"
   type: "list"

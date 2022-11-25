@@ -1,5 +1,6 @@
 import loadScript from "discourse/lib/load-script";
 import { apiInitializer } from "discourse/lib/api";
+import discourseDebounce from "discourse-common/lib/debounce";
 
 async function applyMermaid(element, key = "composer") {
   const mermaids = element.querySelectorAll("pre[data-code-wrap=mermaid]");
@@ -8,7 +9,7 @@ async function applyMermaid(element, key = "composer") {
     return;
   }
 
-  await loadScript("https://unpkg.com/mermaid@8.13.10/dist/mermaid.min.js");
+  await loadScript(settings.theme_uploads.mermaid_js);
 
   window.mermaid.initialize({
     startOnLoad: false,
@@ -28,7 +29,7 @@ async function applyMermaid(element, key = "composer") {
     const spinner = document.createElement("div");
     spinner.classList.add("spinner");
 
-    if (mermaid.dataset.codeHeight) {
+    if (mermaid.dataset.codeHeight && key !== "composer") {
       mermaid.style.height = `${mermaid.dataset.codeHeight}px`;
     }
 
@@ -58,7 +59,53 @@ async function applyMermaid(element, key = "composer") {
       mermaid.dataset.processed = true;
       mermaid.querySelector(".spinner")?.remove();
     }
+
+    if (key === "composer") {
+      discourseDebounce(updateMarkdownHeight, mermaid, index, 500);
+    }
   });
+}
+
+function updateMarkdownHeight(mermaid, index) {
+  let height = parseInt(mermaid.getBoundingClientRect().height);
+  let calculatedHeight = parseInt(mermaid.dataset.calculatedHeight);
+
+  if (height === 0) {
+    return;
+  }
+
+  if (height !== calculatedHeight) {
+    mermaid.dataset.calculatedHeight = height;
+    // TODO: an API to grab the composer vs leaning on hunting through HTML
+    // would be better
+    let composer = document.getElementsByClassName("d-editor-input")[0];
+
+    let split = composer.value.split("\n");
+
+    let n = 0;
+    for (let i = 0; i < split.length; i++) {
+      if (split[i].match(/```mermaid((\s*)|.*auto)$/)) {
+        if (n === index) {
+          split[i] = "```mermaid height=" + height + ",auto";
+        }
+        n += 1;
+      }
+    }
+
+    let joined = split.join("\n");
+
+    if (joined !== composer.value) {
+      let restorePosStart = composer.selectionStart;
+      let restorePosEnd = composer.selectionEnd;
+
+      composer.value = joined;
+
+      if (restorePosStart) {
+        composer.selectionStart = restorePosStart;
+        composer.selectionEnd = restorePosEnd;
+      }
+    }
+  }
 }
 
 export default apiInitializer("0.11.1", (api) => {
