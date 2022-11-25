@@ -1,6 +1,6 @@
 import loadScript from "discourse/lib/load-script";
 import { apiInitializer } from "discourse/lib/api";
-import { debounce } from "@ember/runloop";
+import discourseDebounce from "discourse-common/lib/debounce";
 
 async function applyMermaid(element, key = "composer") {
   const mermaids = element.querySelectorAll("pre[data-code-wrap=mermaid]");
@@ -61,7 +61,7 @@ async function applyMermaid(element, key = "composer") {
     }
 
     if (key === "composer") {
-      debounce(() => updateMarkdownHeight(mermaid, index), 500);
+      discourseDebounce(updateMarkdownHeight, mermaid, index, 500);
     }
   });
 }
