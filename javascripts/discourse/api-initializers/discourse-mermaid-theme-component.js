@@ -9,7 +9,7 @@ async function applyMermaid(element, key = "composer") {
     return;
   }
 
-  await loadScript(settings.theme_uploads.mermaid_js);
+  await loadScript(settings.theme_uploads_local.mermaid_js);
 
   window.mermaid.initialize({
     startOnLoad: false,
