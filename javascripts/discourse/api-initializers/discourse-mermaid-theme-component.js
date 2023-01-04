@@ -54,7 +54,7 @@ async function applyMermaid(element, key = "composer") {
         );
       }
     } catch (e) {
-      mermaid.innerHTML = `<span class="mermaid-error">${e?.str || e}</span>`;
+      mermaid.innerText = e?.text || e;
     } finally {
       mermaid.dataset.processed = true;
       mermaid.querySelector(".spinner")?.remove();
