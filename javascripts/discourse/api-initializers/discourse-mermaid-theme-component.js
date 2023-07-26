@@ -43,21 +43,22 @@ async function applyMermaid(element, key = "composer") {
       return;
     }
 
-    try {
-      if (window.mermaid.parse(code.textContent || "")) {
-        window.mermaid.mermaidAPI.render(
-          `mermaid_${index}_${key}`,
-          code.textContent || "",
-          (svg) => {
-            mermaid.innerHTML = svg;
-          }
-        );
-      }
-    } catch (e) {
-      mermaid.innerText = e?.text || e;
-    } finally {
-      mermaid.dataset.processed = true;
-      mermaid.querySelector(".spinner")?.remove();
+    if (window.mermaid.parse(code.textContent || "")) {
+      const promise = window.mermaid.render(
+        `mermaid_${index}_${key}`,
+        code.textContent || ""
+      );
+      promise
+        .then((object) => {
+          mermaid.innerHTML = object.svg;
+        })
+        .catch((e) => {
+          mermaid.innerText = e?.message || e;
+        })
+        .finally(() => {
+          mermaid.dataset.processed = true;
+          mermaid.querySelector(".spinner")?.remove();
+        });
     }
 
     if (key === "composer") {
