@@ -54,10 +54,7 @@ async function applyMermaid(element, key = "composer") {
           mermaid.innerText = e?.message || e;
 
           // mermaid injects an error element, we need to remove it
-          let injectedElement = document.getElementById(mermaidId);
-          if (injectedElement) {
-            injectedElement.parentNode.removeChild(injectedElement);
-          }
+          document.getElementById(mermaidId)?.remove();
         })
         .finally(() => {
           mermaid.dataset.processed = true;
