@@ -43,23 +43,21 @@ async function applyMermaid(element, key = "composer") {
       return;
     }
 
-    if (window.mermaid.parse(code.textContent || "")) {
-      const promise = window.mermaid.render(
-        `mermaid_${index}_${key}`,
-        code.textContent || ""
-      );
-      promise
-        .then((object) => {
-          mermaid.innerHTML = object.svg;
-        })
-        .catch((e) => {
-          mermaid.innerText = e?.message || e;
-        })
-        .finally(() => {
-          mermaid.dataset.processed = true;
-          mermaid.querySelector(".spinner")?.remove();
-        });
-    }
+    const mermaidId = `mermaid_${index}_${key}`;
+    const promise = window.mermaid.render(mermaidId, code.textContent || "");
+    promise
+      .then((object) => {
+        mermaid.innerHTML = object.svg;
+      })
+      .catch((e) => {
+        mermaid.innerText = e?.message || e;
+        // mermaid injects an error element, we need to remove it
+        document.getElementById(mermaidId)?.remove();
+      })
+      .finally(() => {
+        mermaid.dataset.processed = true;
+        mermaid.querySelector(".spinner")?.remove();
+      });
 
     if (key === "composer") {
       discourseDebounce(updateMarkdownHeight, mermaid, index, 500);
