@@ -44,16 +44,20 @@ async function applyMermaid(element, key = "composer") {
     }
 
     if (window.mermaid.parse(code.textContent || "")) {
-      const promise = window.mermaid.render(
-        `mermaid_${index}_${key}`,
-        code.textContent || ""
-      );
+      const mermaidId = `mermaid_${index}_${key}`;
+      const promise = window.mermaid.render(mermaidId, code.textContent || "");
       promise
         .then((object) => {
           mermaid.innerHTML = object.svg;
         })
         .catch((e) => {
           mermaid.innerText = e?.message || e;
+
+          // mermaid injects an error element, we need to remove it
+          let injectedElement = document.getElementById(mermaidId);
+          if (injectedElement) {
+            injectedElement.parentNode.removeChild(injectedElement);
+          }
         })
         .finally(() => {
           mermaid.dataset.processed = true;
