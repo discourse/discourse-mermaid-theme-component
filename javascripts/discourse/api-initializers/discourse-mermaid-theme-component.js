@@ -107,15 +107,7 @@ function updateMarkdownHeight(mermaid, index) {
   }
 }
 
-export default apiInitializer("0.11.1", (api) => {
-  api.addToolbarPopupMenuOptionsCallback(() => {
-    return {
-      action: "insertMermaidSample",
-      icon: "project-diagram",
-      label: themePrefix("insert_mermaid_sample"),
-    };
-  });
-
+export default apiInitializer("1.15.0", (api) => {
   // this is a hack as applySurround expects a top level
   // composer key, not possible from a theme
   window.I18n.translations[
@@ -123,17 +115,16 @@ export default apiInitializer("0.11.1", (api) => {
   ].js.composer.mermaid_sample = `    flowchart
          A --> B`;
 
-  api.modifyClass("controller:composer", {
-    pluginId: "discourse-mermaid-theme-component",
-    actions: {
-      insertMermaidSample() {
-        this.toolbarEvent.applySurround(
-          "\n```mermaid\n",
-          "\n```\n",
-          "mermaid_sample",
-          { multiline: false }
-        );
-      },
+  api.addComposerToolbarPopupMenuOption({
+    icon: "project-diagram",
+    label: themePrefix("insert_mermaid_sample"),
+    action: (toolbarEvent) => {
+      toolbarEvent.applySurround(
+        "\n```mermaid\n",
+        "\n```\n",
+        "mermaid_sample",
+        { multiline: false }
+      );
     },
   });
 
