@@ -2,7 +2,7 @@
   "about_url": null,
   "license_url": null,
   "assets": {
-    "mermaid_js": "assets/mermaid-10.2.4.min.js"
+    "mermaid_js": "assets/mermaid-10.6.1.min.js"
   },
   "name": "discourse-mermaid-theme-component",
   "component": true
