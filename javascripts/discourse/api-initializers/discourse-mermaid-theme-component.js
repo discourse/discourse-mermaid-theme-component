@@ -1,5 +1,5 @@
-import loadScript from "discourse/lib/load-script";
 import { apiInitializer } from "discourse/lib/api";
+import loadScript from "discourse/lib/load-script";
 import discourseDebounce from "discourse-common/lib/debounce";
 
 async function applyMermaid(element, key = "composer") {
@@ -66,8 +66,8 @@ async function applyMermaid(element, key = "composer") {
 }
 
 function updateMarkdownHeight(mermaid, index) {
-  let height = parseInt(mermaid.getBoundingClientRect().height);
-  let calculatedHeight = parseInt(mermaid.dataset.calculatedHeight);
+  let height = parseInt(mermaid.getBoundingClientRect().height, 10);
+  let calculatedHeight = parseInt(mermaid.dataset.calculatedHeight, 10);
 
   if (height === 0) {
     return;
