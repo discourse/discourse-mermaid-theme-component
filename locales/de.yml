@@ -5,3 +5,5 @@
 # https://translate.discourse.org/
 
 de:
+  rendering_error: "<b>Fehler</b><p>Bitte stelle sicher, dass dein mermaid-Code auf <a href='https://mermaid.live/'>mermaid.live</a> funktioniert und mit 4 Leerzeichen eingerückt ist, z.B: <pre><code>    flowchart TB\n    A --> B</code></pre></p>"
+  insert_mermaid_sample: "Mermaid-Diagramm"
