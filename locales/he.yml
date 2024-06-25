@@ -5,3 +5,5 @@
 # https://translate.discourse.org/
 
 he:
+  rendering_error: "<b>שגיאה</b><p>נא לוודא שקוד ה־mermaid שלך עובד ב־<a href='https://mermaid.live/'>mermaid.live</a> ומוזח ב־4 רווחים, למשל: ‎<pre><code>    flowchart TB\n    A --> B</code></pre></p>‎"
+  insert_mermaid_sample: "תרשים Mermaid"
