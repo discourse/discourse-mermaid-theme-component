@@ -5,3 +5,5 @@
 # https://translate.discourse.org/
 
 it:
+  rendering_error: "<b>Errore</b><p>Assicurati che il tuo codice sirena sia in esecuzione su <a href='https://mermaid.live/'>mermaid.live</a> e con 4 spazi rientrati, ad esempio: <pre><code>    flowchart TB\n    A --> B</code></pre></p>"
+  insert_mermaid_sample: "Grafico sirena"

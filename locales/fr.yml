@@ -5,3 +5,5 @@
 # https://translate.discourse.org/
 
 fr:
+  rendering_error: "<b>Erreur</b><p>Assurez-vous que votre code Mermaid est exécuté sur <a href='https://mermaid.live/'>mermaid.live</a> et qu'il est indenté avec 4 espaces, par exemple : <pre><code>    organigramme TB\n    A --> B</code></pre></p>"
+  insert_mermaid_sample: "Tableau Mermaid"

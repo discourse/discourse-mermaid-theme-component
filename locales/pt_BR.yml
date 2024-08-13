@@ -5,3 +5,5 @@
 # https://translate.discourse.org/
 
 pt_BR:
+  rendering_error: "<b>Erro</b><p>Verifique se o seu código do mermaid está rodando no <a href='https://mermaid.live/'>mermaid.live</a> e indentado com quatro espaços, por exemplo: <pre><code>    fluxograma TB\n    A --> B</code></pre></p>"
+  insert_mermaid_sample: "Gráfico do Mermaid"

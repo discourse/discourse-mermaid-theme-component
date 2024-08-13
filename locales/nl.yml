@@ -5,3 +5,5 @@
 # https://translate.discourse.org/
 
 nl:
+  rendering_error: "<b>Fout</b><p>Zorg dat je mermaid-code loopt op <a href='https://mermaid.live/'>mermaid.live</a> en is ingesprongen met 4 spaties, bijvoorbeeld: <pre><code>    flowchart TB\n    A --> B</code></pre></p>"
+  insert_mermaid_sample: "Mermaid-diagram"

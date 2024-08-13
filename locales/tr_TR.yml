@@ -5,3 +5,5 @@
 # https://translate.discourse.org/
 
 tr_TR:
+  rendering_error: "<b>Hata</b><p>Lütfen denizkızı kodunuzun <a href='https://mermaid.live/'>mermaid.live</a> üzerinde çalıştığından ve 4 boşlukla girintili olduğundan emin olun, ör.: <pre><code>    akış şeması TB\n    A --> B</code></pre></p>"
+  insert_mermaid_sample: "Denizkızı çizelgesi"
