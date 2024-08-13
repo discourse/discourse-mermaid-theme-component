@@ -5,3 +5,5 @@
 # https://translate.discourse.org/
 
 ar:
+  rendering_error: "<b>خطأ</b><p>يُرجى التأكد من تشغيل رمز Mermaid البرمجي الخاص بك على <a href='https://mermaid.live/'>mermaid.live</a> وتسبقه مسافة بادئة تبلغ 4 مسافات، على سبيل المثال: <pre><code>    flowchart TB\n    A --> B</code></pre></p>"
+  insert_mermaid_sample: "مخطط Mermaid"

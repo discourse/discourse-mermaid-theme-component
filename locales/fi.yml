@@ -5,3 +5,5 @@
 # https://translate.discourse.org/
 
 fi:
+  rendering_error: "<b>Virhe</b><p>Varmista, että mermaid-koodisi on käynnissä osoitteessa <a href='https://mermaid.live/'>mermaid.live</a> ja että se sisennetty neljällä välilyönnillä, esim.: <pre><code>    flowchart TB\n    A --> B</code></pre></p>"
+  insert_mermaid_sample: "Mermaid-kaavio"

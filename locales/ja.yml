@@ -5,3 +5,5 @@
 # https://translate.discourse.org/
 
 ja:
+  rendering_error: "<b>エラー</b><p>merrmaid コードが <a href='https://mermaid.live/'>mermaid.live</a> で実行しており、4 つのスペースでインデントされていることを確認してください。例: <pre><code>    flowchart TB\n    A --> B</code></pre></p>"
+  insert_mermaid_sample: "Mermaid チャート"
