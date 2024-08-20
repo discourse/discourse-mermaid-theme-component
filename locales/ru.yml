@@ -5,3 +5,5 @@
 # https://translate.discourse.org/
 
 ru:
+  rendering_error: "<b>Ошибка</b><p>Убедитесь, что ваш код mermaid выполняется на <a href='https://mermaid.live/'>mermaid.live</a> и имеет отступ в 4 пробела, например: <pre><code> flowchart TB\nA --> B</code></pre></p>"
+  insert_mermaid_sample: "Mermaid Chart"
