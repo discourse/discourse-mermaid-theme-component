@@ -1,5 +1,5 @@
 # settings.yml
 svg_icons:
-  default: "project-diagram"
+  default: "diagram-project"
   type: "list"
   list_type: "compact"
