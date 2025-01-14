@@ -5,3 +5,5 @@
 # https://translate.discourse.org/
 
 cs:
+  rendering_error: "<b>Chyba</b><p>Ujistěte se prosím, že váš kód mermaid je možné spustit na <a href='https://mermaid.live/'>mermaid.live</a> a je odsazen 4 mezerami, např: <pre><code>    TB\n    A --> B</code></pre></p>"
+  insert_mermaid_sample: "Mermaid diagram"
