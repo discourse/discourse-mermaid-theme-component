@@ -116,7 +116,7 @@ export default apiInitializer("1.13.0", (api) => {
          A --> B`;
 
   api.addComposerToolbarPopupMenuOption({
-    icon: "project-diagram",
+    icon: "diagram-project",
     label: themePrefix("insert_mermaid_sample"),
     action: (toolbarEvent) => {
       toolbarEvent.applySurround(
