@@ -58,37 +58,44 @@ async function applyMermaid(element, key = "composer", container) {
         mermaid.dataset.processed = true;
         mermaid.querySelector(".spinner")?.remove();
       });
-
-    if (key === "composer") {
-      discourseDebounce(updateMarkdownHeight, mermaid, index, container, 500);
-    }
   });
+
+  if (key === "composer") {
+    discourseDebounce(updateMarkdownHeight, mermaids, container, 500);
+  }
 }
 
-function updateMarkdownHeight(mermaid, index, container) {
+function updateMarkdownHeight(mermaids, container) {
   const appEvents = container.lookup("service:app-events");
   const composer = container.lookup("service:composer");
 
-  let height = parseInt(mermaid.getBoundingClientRect().height, 10);
-  let calculatedHeight = parseInt(mermaid.dataset.calculatedHeight, 10);
+  mermaids.forEach((mermaid, index) => {
+    let height = parseInt(mermaid.getBoundingClientRect().height, 10);
+    let calculatedHeight = parseInt(mermaid.dataset.calculatedHeight, 10);
+    console.log(height, calculatedHeight);
 
-  if (height === 0) {
-    return;
-  }
+    if (height === 0) {
+      return;
+    }
 
-  if (height !== calculatedHeight) {
-    mermaid.dataset.calculatedHeight = height;
+    if (height !== calculatedHeight) {
+      mermaid.dataset.calculatedHeight = height;
 
-    const regex = /```mermaid((\s*)|.*auto)$/gm;
-    const existing = [...composer.model.reply.matchAll(regex)][index]?.[0];
+      const regex = /```mermaid((\s*)|.*auto)$/gm;
+      const existing = [...composer.model.reply.matchAll(regex)][index]?.[0];
 
-    appEvents.trigger(
-      `composer:replace-text`,
-      existing,
-      "```mermaid height=" + height + ",auto",
-      { regex, index }
-    );
-  }
+      if (!existing) {
+        return;
+      }
+
+      appEvents.trigger(
+        `composer:replace-text`,
+        existing,
+        "```mermaid height=" + height + ",auto",
+        { regex, index }
+      );
+    }
+  });
 }
 
 export default apiInitializer("1.13.0", (api) => {
