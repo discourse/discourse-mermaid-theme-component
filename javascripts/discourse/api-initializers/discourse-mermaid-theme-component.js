@@ -2,7 +2,7 @@ import { apiInitializer } from "discourse/lib/api";
 import loadScript from "discourse/lib/load-script";
 import discourseDebounce from "discourse-common/lib/debounce";
 
-async function applyMermaid(element, key = "composer") {
+async function applyMermaid(element, key = "composer", container) {
   const mermaids = element.querySelectorAll("pre[data-code-wrap=mermaid]");
 
   if (!mermaids.length) {
@@ -60,12 +60,15 @@ async function applyMermaid(element, key = "composer") {
       });
 
     if (key === "composer") {
-      discourseDebounce(updateMarkdownHeight, mermaid, index, 500);
+      discourseDebounce(updateMarkdownHeight, mermaid, index, container, 500);
     }
   });
 }
 
-function updateMarkdownHeight(mermaid, index) {
+function updateMarkdownHeight(mermaid, index, container) {
+  const appEvents = container.lookup("service:app-events");
+  const composer = container.lookup("service:composer");
+
   let height = parseInt(mermaid.getBoundingClientRect().height, 10);
   let calculatedHeight = parseInt(mermaid.dataset.calculatedHeight, 10);
 
@@ -75,35 +78,16 @@ function updateMarkdownHeight(mermaid, index) {
 
   if (height !== calculatedHeight) {
     mermaid.dataset.calculatedHeight = height;
-    // TODO: an API to grab the composer vs leaning on hunting through HTML
-    // would be better
-    let composer = document.getElementsByClassName("d-editor-input")[0];
 
-    let split = composer.value.split("\n");
+    const regex = /```mermaid((\s*)|.*auto)$/gm;
+    const existing = [...composer.model.reply.matchAll(regex)][index]?.[0];
 
-    let n = 0;
-    for (let i = 0; i < split.length; i++) {
-      if (split[i].match(/```mermaid((\s*)|.*auto)$/)) {
-        if (n === index) {
-          split[i] = "```mermaid height=" + height + ",auto";
-        }
-        n += 1;
-      }
-    }
-
-    let joined = split.join("\n");
-
-    if (joined !== composer.value) {
-      let restorePosStart = composer.selectionStart;
-      let restorePosEnd = composer.selectionEnd;
-
-      composer.value = joined;
-
-      if (restorePosStart) {
-        composer.selectionStart = restorePosStart;
-        composer.selectionEnd = restorePosEnd;
-      }
-    }
+    appEvents.trigger(
+      `composer:replace-text`,
+      existing,
+      "```mermaid height=" + height + ",auto",
+      { regex, index }
+    );
   }
 }
 
@@ -130,14 +114,14 @@ export default apiInitializer("1.13.0", (api) => {
 
   if (api.decorateChatMessage) {
     api.decorateChatMessage((element) => {
-      applyMermaid(element, `chat_message_${element.id}`);
+      applyMermaid(element, `chat_message_${element.id}`, api.container);
     });
   }
 
   api.decorateCookedElement(
     async (elem, helper) => {
       const id = helper ? `post_${helper.getModel().id}` : "composer";
-      applyMermaid(elem, id);
+      applyMermaid(elem, id, api.container);
     },
     { id: "discourse-mermaid-theme-component" }
   );
