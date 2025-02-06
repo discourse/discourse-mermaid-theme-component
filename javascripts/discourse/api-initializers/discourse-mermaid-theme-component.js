@@ -1,6 +1,6 @@
 import { apiInitializer } from "discourse/lib/api";
+import discourseDebounce from "discourse/lib/debounce";
 import loadScript from "discourse/lib/load-script";
-import discourseDebounce from "discourse-common/lib/debounce";
 
 async function applyMermaid(element, key = "composer", container) {
   const mermaids = element.querySelectorAll("pre[data-code-wrap=mermaid]");
