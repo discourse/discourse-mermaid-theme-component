@@ -1,14 +1,56 @@
-.cooked pre[data-code-wrap="mermaid"] {
-  overflow-y: auto;
+.mermaid-wrapper {
+  position: relative;
   margin: 1em 0;
-  font-size: var(--font-0);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 450px;
+  aspect-ratio: 16 / 9;
+  height: auto;
 
-  &:not([data-processed="true"]) {
-    // prevents text flashing while loading
-    font-size: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: var(--primary-50);
+
+  &:first-child {
+    margin-top: 0;
   }
+
+  .mermaid-diagram-controls {
+    position: absolute;
+    display: flex;
+    top: 0;
+    right: 0;
+
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  html.no-touch & .mermaid-diagram-controls {
+    transition: opacity 0.3s;
+    opacity: 0;
+  }
+
+  html.no-touch &:hover .mermaid-diagram-controls {
+    opacity: 1;
+  }
+}
+
+.mermaid-diagram {
+  overflow-y: scroll;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 1em;
+  box-sizing: border-box;
+
+  & > * {
+    margin: auto;
+    min-height: max-content;
+  }
+}
+
+.d-modal.mermaid-fullscreen {
+  --modal-max-width: 95vw;
 }
