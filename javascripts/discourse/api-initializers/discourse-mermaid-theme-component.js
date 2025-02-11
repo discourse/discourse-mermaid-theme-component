@@ -15,8 +15,11 @@ function applyMermaid(mermaidPre, helper) {
     helper.renderGlimmer(mermaidWrapper, MermaidInline, {
       src: mermaidSrc,
     });
+    mermaidPre.replaceWith(mermaidWrapper);
   } else {
     // Legacy support for parts of core which cannot renderGlimmer. No fullscreen support
+    mermaidPre.replaceChildren(mermaidWrapper);
+
     const mermaidDiagram = document.createElement("div");
     mermaidDiagram.classList.add("mermaid-diagram");
     mermaidDiagram.innerHTML = "<div class='spinner'></div>";
@@ -33,8 +36,6 @@ function applyMermaid(mermaidPre, helper) {
         mermaidDiagram.replaceChildren(errorDiv);
       });
   }
-
-  mermaidPre.replaceWith(mermaidWrapper);
 }
 
 export default apiInitializer("1.13.0", (api) => {
@@ -62,7 +63,7 @@ export default apiInitializer("1.13.0", (api) => {
     api.decorateChatMessage((element) => {
       element
         .querySelectorAll("pre[data-code-wrap=mermaid]")
-        .forEach((mermaidPre, helper) => applyMermaid(element, helper));
+        .forEach((mermaidPre, helper) => applyMermaid(mermaidPre, helper));
     });
   }
 
