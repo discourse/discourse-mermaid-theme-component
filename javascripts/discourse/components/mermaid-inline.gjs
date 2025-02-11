@@ -21,7 +21,7 @@ export default class MermaidInline extends Component {
     <div class="mermaid-diagram-controls">
       <DButton
         @icon="discourse-expand"
-        class="btn-flat"
+        class="btn-flat mermaid-fullscreen-button"
         @action={{this.fullscreen}}
       />
     </div>
