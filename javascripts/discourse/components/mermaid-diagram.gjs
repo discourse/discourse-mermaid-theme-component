@@ -62,7 +62,6 @@ export async function generateDiagram(source) {
 
 export default class MermaidDiagram extends Component {
   @tracked zoomed = false;
-  @tracked isRestrictedWidth = false;
 
   @cached
   get mermaidDiagram() {
