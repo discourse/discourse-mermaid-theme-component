@@ -35,7 +35,7 @@
 }
 
 .mermaid-diagram {
-  overflow-y: scroll;
+  overflow: scroll;
   height: 100%;
   width: 100%;
   display: flex;
@@ -51,6 +51,17 @@
   }
 }
 
-.d-modal.mermaid-fullscreen {
+.d-modal.mermaid-fullscreen .d-modal__container {
+  width: 100%;
+  height: 100%;
   --modal-max-width: 95vw;
+
+  .d-modal__body {
+    height: 100%;
+  }
+
+  .mermaid-diagram.zoomed > svg {
+    width: auto;
+    height: 100%;
+  }
 }
