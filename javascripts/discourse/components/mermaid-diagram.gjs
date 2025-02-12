@@ -1,6 +1,9 @@
 import Component from "@glimmer/component";
 import { cached, tracked } from "@glimmer/tracking";
+import { on } from "@ember/modifier";
+import { action } from "@ember/object";
 import { htmlSafe } from "@ember/template";
+import concatClass from "discourse/helpers/concat-class";
 import loadingSpinner from "discourse/helpers/loading-spinner";
 import loadScript from "discourse/lib/load-script";
 
@@ -58,14 +61,34 @@ export async function generateDiagram(source) {
 }
 
 export default class MermaidDiagram extends Component {
+  @tracked zoomed = false;
+  @tracked isRestrictedWidth = false;
+
   @cached
   get mermaidDiagram() {
     const src = this.args.src;
     return new TrackedPromise(generateDiagram(src));
   }
 
+  @action
+  toggleZoom(event) {
+    event.preventDefault();
+    if (!this.args.enableZoom) {
+      return;
+    }
+    this.zoomed = !this.zoomed;
+  }
+
   <template>
-    <div class="mermaid-diagram">
+    {{! template-lint-disable no-invalid-interactive }}
+    <div
+      class={{concatClass
+        "mermaid-diagram"
+        (if @enableZoom "zoomable")
+        (if this.zoomed "zoomed")
+      }}
+      {{on "click" this.toggleZoom}}
+    >
       {{#if this.mermaidDiagram.isPending}}
         {{loadingSpinner}}
       {{else if this.mermaidDiagram.isResolved}}
