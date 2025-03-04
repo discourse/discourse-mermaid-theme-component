@@ -1,9 +1,3 @@
-# WARNING: Never edit this file.
-# It will be overwritten when translations are pulled from Crowdin.
-#
-# To work with us on translations, join this project:
-# https://translate.discourse.org/
-
-pt_BR:
+pt:
   rendering_error: "<b>Erro</b><p>Verifique se o seu código do mermaid está rodando no <a href='https://mermaid.live/'>mermaid.live</a> e indentado com quatro espaços, por exemplo: <pre><code>    fluxograma TB\n    A --> B</code></pre></p>"
   insert_mermaid_sample: "Gráfico do Mermaid"
