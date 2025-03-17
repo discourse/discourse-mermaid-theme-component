@@ -3,11 +3,9 @@
   margin: 1em 0;
   aspect-ratio: 16 / 9;
   height: auto;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-
   background-color: var(--primary-50);
 
   &:first-child {
@@ -19,8 +17,7 @@
     display: flex;
     top: 0;
     right: 0;
-
-    -webkit-user-select: none;
+    user-select: none;
     user-select: none;
   }
 
@@ -41,7 +38,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
   padding: 1em;
   box-sizing: border-box;
 
@@ -54,6 +50,7 @@
 .d-modal.mermaid-fullscreen .d-modal__container {
   width: 100%;
   height: 100%;
+
   --modal-max-width: 95vw;
 
   .d-modal__body {
