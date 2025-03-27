@@ -1,4 +1,3 @@
-# settings.yml
 svg_icons:
   default: "diagram-project"
   type: "list"
