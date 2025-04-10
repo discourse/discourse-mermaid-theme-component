@@ -1,9 +1,9 @@
 {
+  "name": "Discourse Mermaid",
+  "component": true,
   "about_url": "https://meta.discourse.org/t/discourse-mermaid/218242",
   "license_url": null,
   "assets": {
     "mermaid_js": "assets/mermaid-11.4.1.min.js"
-  },
-  "name": "Discourse Mermaid",
-  "component": true
+  }
 }
