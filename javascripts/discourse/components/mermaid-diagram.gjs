@@ -47,6 +47,7 @@ async function loadMermaid() {
         .trim() === "dark"
         ? "dark"
         : "default",
+    suppressErrorRendering: true,
   });
 }
 
