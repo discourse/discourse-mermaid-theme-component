@@ -5,3 +5,5 @@
 # https://translate.discourse.org/
 
 vi:
+  rendering_error: "<b>Lỗi</b><p>Vui lòng đảm bảo mã Mermaid của bạn đang chạy trên <a href='https://mermaid.live/'>mermaid.live</a> và được thụt lề bằng 4 khoảng trắng, ví dụ: <pre><code>    sơ đồ luồng TB\n    A --> B</code></pre></p>"
+  insert_mermaid_sample: "Tạo biểu đồ Mermaid"
