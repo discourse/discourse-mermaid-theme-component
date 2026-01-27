@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe "mermaid theme", type: :system do
+describe "mermaid theme" do
   before { upload_theme_component }
 
   context "when rendering valid diagrams" do
