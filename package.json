@@ -24,7 +24,8 @@
     "lint:prettier": "pnpm prettier {javascripts,desktop,mobile,common,scss}/**/*.scss {javascripts,test}/**/*.{js,gjs} --check --no-error-on-unmatched-pattern",
     "lint:prettier:fix": "pnpm prettier {javascripts,desktop,mobile,common,scss}/**/*.scss {javascripts,test}/**/*.{js,gjs} -w --no-error-on-unmatched-pattern",
     "lint:types": "ember-tsc -b",
-    "lttf:ignore": "lint-to-the-future ignore"
+    "lttf:ignore": "lint-to-the-future ignore",
+    "update:mermaid": "node scripts/update-mermaid.mjs"
   },
   "engines": {
     "node": ">= 22",
