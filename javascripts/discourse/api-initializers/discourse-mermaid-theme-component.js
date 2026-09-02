@@ -66,12 +66,10 @@ export default apiInitializer((api) => {
   });
 
   if (api.decorateChatMessage) {
-    api.decorateChatMessage((element) => {
+    api.decorateChatMessage((element, helper) => {
       element
         .querySelectorAll("pre[data-code-wrap=mermaid]")
-        // the second forEach argument is the index, not a helper: chat has
-        // no renderGlimmer helper here, so the legacy path applies
-        .forEach((mermaidPre) => applyMermaid(mermaidPre));
+        .forEach((mermaidPre) => applyMermaid(mermaidPre, helper));
     });
   }
 

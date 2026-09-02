@@ -31,6 +31,41 @@ describe "mermaid theme" do
     end
   end
 
+  context "when previewing in the rich editor" do
+    include_context "with prosemirror editor"
+
+    let(:toolbar) { PageObjects::Components::ComposerPreviewToolbar.new }
+
+    def compose_mermaid(source)
+      open_composer
+      composer.type_content("```#{source}")
+
+      expect(rich).to have_css("pre code", text: source.lines.first.strip)
+
+      # the language cannot be typed into the fence, so it is picked here
+      rich.find("pre .code-language-select").find("option", text: "mermaid").select_option
+      toolbar.click_show_preview
+    end
+
+    it "renders the diagram in place of the source" do
+      compose_mermaid("flowchart\nA --> B")
+
+      expect(rich).to have_css(".mermaid-preview .mermaid-diagram svg")
+      expect(rich).to have_no_css("pre")
+
+      toolbar.click_show_source
+
+      expect(rich).to have_css("pre code", text: "flowchart")
+    end
+
+    it "shows a controlled error message for invalid syntax" do
+      compose_mermaid("flowchart\nA -")
+
+      expect(rich).to have_css(".mermaid-preview .alert.alert-error")
+      expect(page).not_to have_css("svg[aria-roledescription='error']")
+    end
+  end
+
   context "when rendering diagrams with invalid syntax" do
     let(:invalid_mermaid_src) { <<~MERMAID }
       ```mermaid
