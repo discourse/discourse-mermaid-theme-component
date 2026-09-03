@@ -50,7 +50,7 @@ describe "mermaid theme" do
     it "renders the diagram in place of the source" do
       compose_mermaid("flowchart\nA --> B")
 
-      expect(rich).to have_css(".mermaid-preview .mermaid-diagram svg")
+      expect(rich).to have_css("[data-language='mermaid'] .mermaid-diagram svg")
       expect(rich).to have_no_css("pre")
 
       toolbar.click_show_source
@@ -61,7 +61,7 @@ describe "mermaid theme" do
     it "shows a controlled error message for invalid syntax" do
       compose_mermaid("flowchart\nA -")
 
-      expect(rich).to have_css(".mermaid-preview .alert.alert-error")
+      expect(rich).to have_css("[data-language='mermaid'] .alert.alert-error")
       expect(page).not_to have_css("svg[aria-roledescription='error']")
     end
   end

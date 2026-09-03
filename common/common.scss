@@ -62,28 +62,11 @@
   }
 }
 
-// The rich editor's code block preview clamps its face to a few lines by
-// default; a diagram needs the room its aspect ratio asks for. The shared
-// .mermaid-diagram rules above assume the cooked wrapper's fixed height and
-// own the outer scroll, neither of which holds inside the editor.
-.composer-code-block-preview-node[data-language="mermaid"] {
-  // the editor clamps a code block preview to a few lines by default; a
-  // diagram takes the room it has in a post instead
-  --composer-preview-node-source-max-height: none;
-
-  .mermaid-preview {
-    aspect-ratio: 16 / 9;
-  }
-
-  // the shared rule scrolls on both axes for the cooked wrapper; here the
-  // editor already owns the outer scroll
-  .mermaid-diagram {
-    overflow: auto;
-  }
-}
-
-// flipping to the source must not reflow the post below it, so the code face
-// is allowed to keep the height the diagram rendered at
+// The block frames the diagram as the cooked wrapper does, so both faces fit
+// that frame and scroll whatever does not fit inside it. The frame is the
+// bound: the block can never grow past 16/9 of the editor's width.
+.composer-code-block-preview-node[data-language="mermaid"],
 pre.--source[data-language="mermaid"] {
-  --composer-preview-node-source-max-height: 100vh;
+  --composer-preview-node-source-max-height: 100%;
+  aspect-ratio: 16 / 9;
 }
