@@ -61,3 +61,12 @@
     height: 100%;
   }
 }
+
+// The block frames the diagram as the cooked wrapper does, so both faces fit
+// that frame and scroll whatever does not fit inside it. The frame is the
+// bound: the block can never grow past 16/9 of the editor's width.
+.composer-code-block-preview-node[data-language="mermaid"],
+pre.--source[data-language="mermaid"] {
+  --composer-preview-node-source-max-height: 100%;
+  aspect-ratio: 16 / 9;
+}

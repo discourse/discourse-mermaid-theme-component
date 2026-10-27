@@ -1,6 +1,7 @@
 import { apiInitializer } from "discourse/lib/api";
 import { generateDiagram } from "../components/mermaid-diagram";
 import MermaidInline from "../components/mermaid-inline";
+import MermaidPreview from "../components/mermaid-preview";
 
 function applyMermaid(mermaidPre, helper) {
   const mermaidSrc = mermaidPre.querySelector("code")?.textContent;
@@ -39,6 +40,12 @@ function applyMermaid(mermaidPre, helper) {
 }
 
 export default apiInitializer((api) => {
+  // cores without code block previews ignore the field, leaving a plain
+  // mermaid code block in the rich editor
+  api.registerRichEditorExtension?.({
+    codeBlockPreviews: { mermaid: MermaidPreview },
+  });
+
   // this is a hack as applySurround expects a top level
   // composer key, not possible from a theme
   window.I18n.translations[window.I18n.locale].js.composer.mermaid_sample =
@@ -59,10 +66,10 @@ export default apiInitializer((api) => {
   });
 
   if (api.decorateChatMessage) {
-    api.decorateChatMessage((element) => {
+    api.decorateChatMessage((element, helper) => {
       element
         .querySelectorAll("pre[data-code-wrap=mermaid]")
-        .forEach((mermaidPre, helper) => applyMermaid(mermaidPre, helper));
+        .forEach((mermaidPre) => applyMermaid(mermaidPre, helper));
     });
   }
 
