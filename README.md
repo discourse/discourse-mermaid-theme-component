@@ -1,5 +1,7 @@
 # discourse-mermaid-theme
 
+> Check out [Discourse Pele](https://meta.discourse.org/t/discourse-pele/415914): same ` ```mermaid ` syntax, much smaller and faster renderer.
+
 ## Updating Mermaid
 
 This component vendors Mermaid as a static theme asset in `assets/`.
